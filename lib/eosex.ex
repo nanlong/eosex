@@ -35,7 +35,7 @@ defmodule Eosex do
 
   ## Examples
     iex> node = %{nodeos_endpoint: "http://127.0.0.1:8888", keosd_endpoint: "http://127.0.0.1:8889"}
-    iex> currency = %{code: "eosio.token", symbol: "EOS"}
+    iex> currency = %{code: "eosio.token", symbol: "EOS", precision: 4}
     iex> Eosex.transfer(node, currency, "eosio", "chainceoneos", 1.0000, "hi there")
   """
   def transfer(node, currency, from, to, quantity, memo, opts \\ []) do
@@ -222,13 +222,15 @@ defmodule Eosex do
 
   # 转账
   defp gen_transfer(currency, from, to, quantity, memo) do
+    precision = currency[:precision] || @eos_precision
+
     %{
       code: currency[:code],
       action: "transfer",
       args: %{
         from: from,
         to: to,
-        quantity: "#{round(quantity, @eos_precision, :down)} #{currency[:symbol]}",
+        quantity: "#{round(quantity, precision, :down)} #{currency[:symbol]}",
         memo: memo
       }
     }

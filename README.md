@@ -21,7 +21,7 @@ Args:
 #### Examples
 ```
 iex> node = %{nodeos_endpoint: "http://127.0.0.1:8888", keosd_endpoint: "http://127.0.0.1:8889"}
-iex> currency = %{code: "eosio.token", symbol: "EOS"}
+iex> currency = %{code: "eosio.token", symbol: "EOS", precision: 4}
 iex> Eosex.transfer(node, currency, "eosio", "chainceoneos", 1.0000, "hi there")
 ```
 
