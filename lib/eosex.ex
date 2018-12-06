@@ -22,7 +22,8 @@ defmodule Eosex do
   转账
 
   Args:
-    * `eosio` - eos节点
+    * `node` - eos节点
+    * `currency` - 币种信息
     * `from` - 转账发起人
     * `to` - 收款人
     * `quantity` - 数量
@@ -30,7 +31,7 @@ defmodule Eosex do
     * `opts` - 选填字段
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
 
   ## Examples
     iex> node = %{nodeos_endpoint: "http://127.0.0.1:8888", keosd_endpoint: "http://127.0.0.1:8889"}
@@ -67,14 +68,14 @@ defmodule Eosex do
   买入ram
 
   Args:
-    * `node`
+    * `node` - eos节点
     * `payer` - 购买者账户名称
     * `receiver` - 接收者账户名称
     * `quant` - eos数量
     * `opts` - 选填字段
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
 
   ## Examples:
     iex> node = %{nodeos_endpoint: "http://jungle2.cryptolions.io:80", keosd_endpoint: "http://127.0.0.1:8889"}
@@ -92,13 +93,13 @@ defmodule Eosex do
   卖出ram
 
   Args:
-    * `node`
+    * `node` - eos节点
     * `account` - 出售账号
     * `bytes` - 内存数量
     * `opts` - 选填字段
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
 
   ## Examples:
     iex> node = %{nodeos_endpoint: "http://jungle2.cryptolions.io:80", keosd_endpoint: "http://127.0.0.1:8889"}
@@ -116,6 +117,7 @@ defmodule Eosex do
   抵押资源
 
   Args:
+    * `node` - eos节点
     * `from` - 抵押者账户名称
     * `receiver` - 接收者账户名称
     * `opts` - 可选参数
@@ -123,7 +125,7 @@ defmodule Eosex do
       * `stake_cpu_quantity` - 抵押的cpu资源，二选一必填
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
       * `transfer` - 0为租借，1为赠送，默认为0
 
   ## Examples:
@@ -146,14 +148,15 @@ defmodule Eosex do
   赎回资源
 
   Args:
+    * `node` - eos节点
     * `from` - 抵押者账户名称
     * `receiver` - 接收者账户名称
-    * `opts` -
+    * `opts` - 可选参数
       * `unstake_net_quantity` - 赎回的网络资源，二选一必填
       * `unstake_cpu_quantity` - 赎回的cpu资源，二选一必填
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
 
   ## Examples:
     iex> node = %{nodeos_endpoint: "http://jungle2.cryptolions.io:80", keosd_endpoint: "http://127.0.0.1:8889"}
@@ -175,12 +178,13 @@ defmodule Eosex do
   将交易发送到链上
 
   Args:
+    * `node` - eos节点
     * `actor` - 操作账户
     * `transfer_info` - 交易信息
     * `opts` - 选填字段
       * `public_key` - 公钥，如果没有填写则会在钱包内筛选所需公钥
       * `permission` - 权限，默认 active
-      * `expiration` - 过期时间，默认20分钟
+      * `expiration` - 过期时间，默认1小时
   """
   def send_to_chain(node, actor, transfer_info, opts \\ []) do
     # 将交易信息由JSON格式序列化为BIN格式字符串
