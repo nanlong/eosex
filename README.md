@@ -2,7 +2,9 @@
 
 启动命令行，设置钱包名称和密码
 
-`WALLET_NAME=default WALLET_PASSWORD=PW5Kxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx iex -S mix`
+```
+shell> WALLET_NAME=替换自己的钱包名称 WALLET_PASSWORD=替换自己的钱包密码 iex -S mix
+```
 
 ### 1. 账号间转账
 
