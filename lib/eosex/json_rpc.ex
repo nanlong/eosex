@@ -180,7 +180,7 @@ defmodule Eosex.JsonRpc do
     查询智能合约数据
 
     Args:
-      * ``scope - 账号名称
+      * `scope` - 账号名称
       * `code` - 智能合约名称
       * `table` - 表名称
       * `opts` - 选填字段

@@ -65,6 +65,42 @@ defmodule Eosex do
   end
 
   @doc """
+  获取cpu市场价，单位 EOS/ms/day
+
+  Args:
+    * `node` - eos节点
+    * `account` - 账号
+
+  ## Examples:
+    iex> node = %{nodeos_endpoint: "http://api.eosnewyork.io"}
+    iex> Eosex.cpu_market(node, "eosonchaince")
+  """
+  def cpu_market(node, account) do
+    {:ok, data} = Chain.get_account(node[:nodeos_endpoint], account)
+    {cpu_staked, _} = Float.parse(data["total_resources"]["cpu_weight"])
+    cpu_available = data["cpu_limit"]["max"] / 1000
+    round(cpu_staked / cpu_available / 3, @eos_precision)
+  end
+
+  @doc """
+  获取net市场价，单位 EOS/KB/day
+
+  Args:
+    * `node` - eos节点
+    * `account` - 账号
+
+  ## Examples:
+    iex> node = %{nodeos_endpoint: "http://api.eosnewyork.io"}
+    iex> Eosex.net_market(node, "eosonchaince")
+  """
+  def net_market(node, account) do
+    {:ok, data} = Chain.get_account(node[:nodeos_endpoint], account)
+    {net_staked, _} = Float.parse(data["total_resources"]["net_weight"])
+    net_available = data["net_limit"]["max"] / 1024
+    round(net_staked / net_available / 3, @eos_precision)
+  end
+
+  @doc """
   买入ram
 
   Args:
