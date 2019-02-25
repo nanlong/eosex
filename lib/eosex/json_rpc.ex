@@ -284,8 +284,9 @@ defmodule Eosex.JsonRpc do
     将签署后的交易推送到区块链
 
     Args:
-      * `transaction` -
-      * `signatures` - 交易签名列表
+      * `data` - 交易参数
+        服务端构造交易 - {transaction, signatures, compression}
+        手机钱包构造交易 - {packed_trx, signatures, packed_context_free_data, compression}
     """
     def push_transaction(endpoint, data) do
       Client.request(endpoint <> "/v1/chain/push_transaction", data)
