@@ -253,7 +253,8 @@ defmodule Eosex do
     transaction = gen_transaction(signed_tx, txn)
 
     # 将签署后的交易推送到区块链
-    Chain.push_transaction(node[:nodeos_endpoint], transaction, signed_tx["signatures"])
+    data = %{transaction: transaction, signatures: signed_tx["signatures"], compression: "none"}
+    Chain.push_transaction(node[:nodeos_endpoint], data)
   end
 
   # 转账

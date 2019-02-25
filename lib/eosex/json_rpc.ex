@@ -287,8 +287,8 @@ defmodule Eosex.JsonRpc do
       * `transaction` -
       * `signatures` - 交易签名列表
     """
-    def push_transaction(endpoint, transaction, signatures) do
-      Client.request(endpoint <> "/v1/chain/push_transaction", transaction: transaction, signatures: signatures, compression: "none")
+    def push_transaction(endpoint, data) do
+      Client.request(endpoint <> "/v1/chain/push_transaction", data)
     end
 
     @doc """
